@@ -4,7 +4,7 @@ There are many songs that deadmau5 has not released but you can find on the Inte
 
 You can find all songs listed [here](https://deadmau5.ml/audio)!
 
-If you represent the copyright holder and would like this removed please contact me directly and I will remove the video immediately.
+If you represent the copyright holder and would like this removed please contact me directly and I will remove the file immediately.
 
 Domains:
 
