@@ -8,7 +8,7 @@ If you represent the copyright holder and would like this removed please contact
 
 Domains:
 
-    deadmau5.byzero.dev
+    deadmau5.by0.link
 
-Created by [byZero](https://byzero.dev)
+Created by [EinfachRuwen](https://einfachruwen.de)
 
