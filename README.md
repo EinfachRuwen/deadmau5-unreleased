@@ -1,14 +1,31 @@
-﻿# Welcome to the Library of unreleased deadmau5 songs
+# Unreleased deadmau5 Song Collection
 
-There are many songs that deadmau5 has not released but you can find on the Internet. Here you can find all the songs that I found.
+This repository serves as a personal archive of unreleased tracks by deadmau5, compiled from various online sources including YouTube and other platforms. Please note that this collection is no longer actively maintained or updated.
 
-You can find all songs listed [here](./audio)!
+## Song List
 
-If you represent the copyright holder and would like this removed please contact me directly and I will remove the file immediately.
+You can find all songs listed in the [audio](./audio) directory!
 
-Domains:
+## Domains
 
-    deadmau5.by0.link
+- deadmau5.by0.link
 
-Created by [EinfachRuwen](https://einfachruwen.de)
+## Disclaimer
 
+This project is for personal archival and educational purposes only. All rights to the music belong to their respective owners, primarily deadmau5 and associated labels/publishers.
+
+If you are a rights holder and have concerns about any content listed here, please contact me at reiner-ausdrucke-0g@icloud.com. I will promptly address any legitimate requests for removal or modification of content.
+
+## Purpose
+
+The aim of this project is to document and preserve information about unreleased works by deadmau5. It is not intended to infringe on any copyrights or distribute protected material.
+
+## Contributing
+
+While this collection is no longer actively maintained, if you have information about additional unreleased tracks or corrections to existing entries, feel free to open an issue or submit a pull request.
+
+## Legal Notice
+
+This project does not claim ownership of any of the listed works. All rights remain with the original creators and copyright holders. The information provided here is for informational purposes only and should not be used for commercial purposes or unauthorized distribution.
+
+[Imprint](https://by0.link/imprint) - [Website](https://by0.link)
