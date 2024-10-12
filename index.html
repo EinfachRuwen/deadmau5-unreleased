@@ -1,28 +1,20 @@
 ﻿<!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Libary of unreleased deadmau5 Songs</title>
-  <link rel="stylesheet" href="https://web.archive.org/web/20220119203223cs_/https://stackedit.io/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unreleased deadmau5 Song Collection</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 </head>
-
-<body class="stackedit">
-  <div class="stackedit__html"><h1 id="welcome-to-the-library-of-unreleased-deadmau5-songs">Welcome to the Library of unreleased deadmau5 songs</h1>
-<p>There are many songs that deadmau5 has not released but you can find on the Internet. Here you can find all the songs that I found.</p>
-<p>You can find all songs listed <a href="./audio">here</a>!</p>
-<p>If you represent the copyright holder and would like this removed please contact me directly and I will remove the file immediately. </p>
-<p>Domains:</p>
-<pre><code>deadmau5.byzero.dev
-</code></pre>
-<p>Created by <a href="https://by0.link">Ruwen</a></p>
-<p><a href="https://by0.link/imprint">Imprint</a></p>
-</div>
-  <noscript>
-  <img src="https://shy.byzero.dev/ingress/75bd0ee0-ee42-4bc8-8a91-1c72cfc67b86/pixel.gif">
-  </noscript>
-  <script defer src="https://shy.byzero.dev/ingress/75bd0ee0-ee42-4bc8-8a91-1c72cfc67b86/script.js"></script>
+<body>
+    <div id="content"></div>
+    <script>
+        fetch('README.md')
+            .then(response => response.text())
+            .then(text => {
+                const converter = new showdown.Converter();
+                document.getElementById('content').innerHTML = converter.makeHtml(text);
+            });
+    </script>
 </body>
-
 </html>
