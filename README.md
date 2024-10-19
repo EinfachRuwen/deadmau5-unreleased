@@ -28,4 +28,4 @@ While this collection is no longer actively maintained, if you have information 
 
 This project does not claim ownership of any of the listed works. All rights remain with the original creators and copyright holders. The information provided here is for informational purposes only and should not be used for commercial purposes or unauthorized distribution.
 
-[E-Mail](https://by0.link/email) - [Website](https://by0.link)
+[E-Mail](mailto:reiner-ausdrucke-0g@icloud.com) - [Website](https://by0.link)
