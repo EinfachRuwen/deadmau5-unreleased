@@ -3,50 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unreleased deadmau5 Song Collection</title>
+    <title>deadmau5-unreleased</title>
+    <meta name="description" content="An archive of unreleased songs by the artist deadmau5. For fans and for documentary purposes.">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+        :root {
+            --bg-color: #fafafa; 
+            --content-bg-color: #ffffff; 
+            --text-color: #2d3748; 
+            --text-secondary: #718096; 
+            --header-color: #1a202c; 
+            --code-bg-color: #f7fafc; 
+            --border-color: #e2e8f0; 
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --accent-color: #805ad5; 
+            --link-color: #805ad5;
+            --link-hover: #6b46c1;
         }
-        h1, h2 {
-            color: #2c3e50;
+        body.dark-mode {
+            --bg-color: #0f0f0f; 
+            --content-bg-color: #1a1a1a; 
+            --text-color: #e2e8f0; 
+            --text-secondary: #a0aec0; 
+            --header-color: #f7fafc; 
+            --code-bg-color: #2d3748; 
+            --border-color: #2d3748; 
+            --shadow-light: rgba(0, 0, 0, 0.3); 
+            --accent-color: #805ad5;
+            --link-color: #805ad5; 
+            --link-hover: #9f7aea;
         }
-        a {
-            color: #3498db;
-            text-decoration: none;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; color: var(--text-color); background-color: var(--bg-color); min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--header-color); text-decoration: none; }
+        .controls { display: flex; gap: 0.5rem; }
+        .controls button { background: transparent; border: none; cursor: pointer; color: var(--text-secondary); padding: 4px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .controls button:hover { color: var(--accent-color); }
+        .controls svg { width: 24px; height: 24px; fill: currentColor; }
+        
+        .tagline { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.5rem; text-align: left; }
+        
+        .icon-sun, body.dark-mode .icon-moon { display: none; }
+        body.dark-mode .icon-sun, .icon-moon { display: block; }
+        
+        .main-content { background: var(--content-bg-color); border-radius: 12px; padding: 2rem; margin-bottom: 1rem; box-shadow: 0 2px 8px var(--shadow-light); border: 1px solid var(--border-color); }
+        h1,h2,h3 { color: var(--header-color); }
+        h1 { font-size: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; }
+        h2 { font-size: 1.5rem; margin: 1.5rem 0 1rem 0; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link-color); text-decoration: none; }
+        a:hover { color: var(--link-hover); text-decoration: underline; }
+        code { background: var(--code-bg-color); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: 'SF Mono', Monaco, Consolas, monospace; }
+
+        .main-content ul,
+        .main-content ol {
+            padding-left: 40px;
+            margin-bottom: 1rem; 
         }
-        a:hover {
-            text-decoration: underline;
+        .main-content li {
+            margin-bottom: 0.25rem;
         }
-        code {
-            background-color: #f0f0f0;
-            padding: 2px 4px;
-            border-radius: 4px;
+
+        .footer-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
-        #content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
+        .loading { opacity: 0.6; }
+        .error { color: #f56565; }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .main-content { padding: 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            .footer-info { line-height: 1.5; }
         }
     </style>
 </head>
 <body>
-    <div id="content"></div>
+    <div class="container">
+        <header class="header">
+            <a href="#" class="logo">deadmau5-unreleased</a>
+            <div class="controls">
+                <button id="langToggle" title="Sprache umschalten">
+                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-7-.5-14.5T799-507q-5 29-27 48t-52 19h-80q-33 0-56.5-23.5T560-520v-40H400v-80q0-33 23.5-56.5T480-720h40q0-23 12.5-40.5T563-789q-20-5-40.5-8t-42.5-3q-134 0-227 93t-93 227h200q66 0 113 47t47 113v40H400v110q20 5 39.5 7.5T480-160Z"/></svg>
+                </button>
+                <button id="themeToggle" title="Theme umschalten">
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></svg>
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M440-760v-160h80v160h-80Zm266 110-55-55 112-115 56 57-113 113Zm54 210v-80h160v80H760ZM440-40v-160h80v160h-80ZM254-652 140-763l57-56 113 113-56 54Zm508 512L651-255l54-54 114 110-57 59ZM40-440v-80h160v80H40Zm157 300-56-57 112-112 29 27 29 28-114 114Zm283-100q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm0-160Z"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <p class="tagline"></p>
+
+        <main class="main-content" id="content"></main>
+
+        <div class="footer-info">
+            <div id="all-stats">...</div>
+        </div>
+    </div>
+
     <script>
-        fetch('README.md')
-            .then(response => response.text())
-            .then(text => {
-                const converter = new showdown.Converter();
-                document.getElementById('content').innerHTML = converter.makeHtml(text);
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const REPO_URL = 'EinfachRuwen/deadmau5-unreleased';
+            const contentDiv = document.getElementById('content');
+            const allStatsDiv = document.getElementById('all-stats');
+            const taglineEl = document.querySelector('.tagline');
+            const themeToggle = document.getElementById('themeToggle');
+            const langToggle = document.getElementById('langToggle');
+
+            const translations = {
+                de: { lang: 'de-DE', commits: 'Commits', lastUpdate: 'Letztes Update', tracks: 'Tracks', today: 'Heute', tagline: 'Ein inoffizielles Archiv unveröffentlichter Werke', loading: 'Lade Inhalt...', error: 'Inhalt konnte nicht geladen werden.' },
+                en: { lang: 'en-US', commits: 'Commits', lastUpdate: 'Last Update', tracks: 'Tracks', today: 'Today', tagline: 'An unofficial archive of unreleased works', loading: 'Loading content...', error: 'Could not load content.' }
+            };
+
+            let currentLang = localStorage.getItem('lang-preference') || (navigator.language.startsWith('de') ? 'de' : 'en');
+            
+            function updateText() {
+                const T = translations[currentLang];
+                document.documentElement.lang = currentLang;
+                taglineEl.textContent = T.tagline;
+            }
+
+            function applyTheme(theme) {
+                document.body.classList.toggle('dark-mode', theme === 'dark');
+            }
+
+            function initializeTheme() {
+                const savedTheme = localStorage.getItem('theme-preference');
+                if (savedTheme) {
+                    applyTheme(savedTheme);
+                } else {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    applyTheme(prefersDark ? 'dark' : 'light');
+                }
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+                localStorage.setItem('theme-preference', newTheme);
+                applyTheme(newTheme);
             });
+            
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme-preference')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+
+            langToggle.addEventListener('click', () => {
+                currentLang = (currentLang === 'de') ? 'en' : 'de';
+                localStorage.setItem('lang-preference', currentLang);
+                updateText();
+                loadStats();
+            });
+
+            async function loadContent() {
+                contentDiv.innerHTML = `<div class="loading">${translations[currentLang].loading}</div>`;
+                try {
+                    const response = await fetch('https://deadmau5.by0.link/README.md');
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const text = await response.text();
+                    const converter = new showdown.Converter({ flavor: 'github', noHeaderId: true, simplifiedAutoLink: true });
+                    contentDiv.innerHTML = converter.makeHtml(text);
+                } catch (error) {
+                    console.error('Content loading error:', error);
+                    contentDiv.innerHTML = `<div class="error">${translations[currentLang].error}</div>`;
+                }
+            }
+
+            async function loadStats() {
+                allStatsDiv.textContent = '...';
+                try {
+                    const [commitsResponse, contentsResponse] = await Promise.all([
+                        fetch(`https://api.github.com/repos/${REPO_URL}/commits?per_page=1`),
+                        fetch(`https://api.github.com/repos/${REPO_URL}/contents/audio`)
+                    ]);
+                    if (!commitsResponse.ok || !contentsResponse.ok) throw new Error('GitHub API response not ok');
+                    const [commits, contents] = await Promise.all([commitsResponse.json(), contentsResponse.json()]);
+                    const T = translations[currentLang];
+                    
+                    let commitCount = commits.length;
+                    const linkHeader = commitsResponse.headers.get('Link');
+                    if (linkHeader) {
+                        const match = linkHeader.match(/page=(\d+)>; rel="last"/);
+                        if (match) commitCount = parseInt(match[1]);
+                    }
+                    
+                    const lastCommitDate = new Date(commits[0].commit.author.date);
+                    const formattedDate = lastCommitDate.toLocaleDateString(T.lang, { year: 'numeric', month: 'long', day: 'numeric' });
+                    const trackCount = Array.isArray(contents) ? contents.filter(item => item.type === 'file').length : 0;
+
+                    allStatsDiv.textContent = `${T.commits}: ${commitCount}  •  ${T.lastUpdate}: ${formattedDate}  •  ${T.tracks}: ${trackCount}`;
+
+                } catch (error) {
+                    console.error('Stats loading error:', error);
+                    allStatsDiv.textContent = 'Stats konnten nicht geladen werden.';
+                }
+            }
+
+            function init() {
+                updateText();
+                initializeTheme();
+                loadContent();
+                loadStats();
+            }
+            init();
+        });
     </script>
 </body>
 </html>
