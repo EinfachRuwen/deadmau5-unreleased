@@ -1,0 +1,10 @@
+artist = "deadmau5"
+image = "cover.png"
+title = "Unreleased deadmau5 Song Collection"
+description = "collected by <a href=\"https://github.com/EinfachRuwen\">Ruwen</a> and <a href=\"https://github.com/Le0X8\">Leo</a> :)"
+url = "https://raw.githubusercontent.com/EinfachRuwen/deadmau5-unreleased/refs/heads/main/audio/"
+link = "https://github.com/EinfachRuwen/deadmau5-unreleased"
+
+[albums]
+unreleased = "audio"
+other = "audio/Other Audio Files"
