@@ -1,0 +1,2 @@
+*.toml linguist-language=toml
+*.toml linguist-detectable
